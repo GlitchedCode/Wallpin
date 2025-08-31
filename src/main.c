@@ -350,6 +350,14 @@ static void cleanup_auto_scroll(void) {
     }
 }
 
+void usage() {
+    g_print("WallPin Wallpaper\n");
+    g_print("Usage: wallpin_wallpaper [Options]\n");
+    g_print("Options:\n");
+    g_print("  --monitor, -m <name>   Specify monitor (eg: HDMI-A-1, eDP-1)\n");
+    g_print("  --help, -h             Show this message\n");
+}
+
 int main(int argc, char **argv) {
     GtkApplication *app;
     int status;
@@ -367,22 +375,13 @@ int main(int argc, char **argv) {
                 app_data.monitor_name = argv[i + 1];
                 i++; // Saltar el siguiente argumento
             } else {
-                g_print("Error: --monitor requiere un nombre de monitor\n");
-                g_print("Uso: %s --monitor <nombre_monitor>\n", argv[0]);
-                g_print("Ejemplo: %s --monitor HDMI-A-1\n", argv[0]);
+                g_print("Error: --monitor requires a monitor name\n");
+                g_print("Usage: %s --monitor <name>\n", argv[0]);
                 free(gtk_argv);
                 return 1;
             }
         } else if (strcmp(argv[i], "--help") == 0 || strcmp(argv[i], "-h") == 0) {
-            g_print("WallPin Wallpaper Mode\n");
-            g_print("Uso: %s [opciones]\n", argv[0]);
-            g_print("Opciones:\n");
-            g_print("  --monitor, -m <nombre>  Especificar monitor (ej: HDMI-A-1, eDP-1)\n");
-            g_print("  --help, -h              Mostrar esta ayuda\n");
-            g_print("\nEjemplos:\n");
-            g_print("  %s                      # Monitor por defecto\n", argv[0]);
-            g_print("  %s -m HDMI-A-1          # Monitor HDMI principal\n", argv[0]);
-            g_print("  %s -m eDP-1             # Pantalla de laptop\n", argv[0]);
+            usage();
             free(gtk_argv);
             return 0;
         } else {
@@ -394,9 +393,12 @@ int main(int argc, char **argv) {
     config = load_config();
 
     if (app_data.monitor_name) {
-        g_print("Iniciando WallPin wallpaper en monitor: %s\n", app_data.monitor_name);
+        g_print("Starting WallPin on monitor: %s\n", app_data.monitor_name);
     } else {
-        g_print("Iniciando WallPin wallpaper en monitor por defecto\n");
+        g_print("WallPin requires --monitor <name> to specify the target monitor for wallpaper mode.\n");
+        usage();
+        free(gtk_argv);
+        return 1;
     }
 
     // Crear application ID único para cada monitor para evitar conflictos

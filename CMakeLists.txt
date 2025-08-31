@@ -38,7 +38,7 @@ add_definitions(${GTKSHELL_CFLAGS_OTHER})
 set(SOURCE_FILES src/config.c
                   src/layer_shell.c
                   src/layout.c 
-                  src/main_wallpaper.c 
+                  src/main.c 
                   src/utils.c 
                   src/wallpaper.c
 )

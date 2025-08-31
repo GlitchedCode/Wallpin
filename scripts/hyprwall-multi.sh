@@ -3,6 +3,7 @@
 # WallPin Multi-Monitor para Hyprland
 # Script para gestionar wallpaper en múltiples pantallas
 
+WP = $(which wallpin)
 LOG_FILE="/tmp/wallpin.log"
 PID_DIR="/tmp/wallpin_pids"
 
@@ -95,15 +96,15 @@ start_monitor() {
     # Asegurar que usamos Wayland
     export GDK_BACKEND=wayland
     
-    # Limpiar log anterior para este monitor
-    echo "=== WallPin iniciado en $monitor $(date) ===" >> "$LOG_FILE"
-    
-    # Ejecutar wallpaper en background para el monitor específico
-    nohup ./build/wallpin-wallpaper --monitor "$monitor" >> "$LOG_FILE" 2>&1 &
+    echo "=== Starting WallPin on monitor $monitor $(date) ===" >> "$LOG_FILE"
+    if [[ ! -x $WP ]]; then
+        echo "❌ Error: wallpin is not installed"
+        return 1
+    fi
+    nohup $WP --monitor "$monitor" >> "$LOG_FILE" 2>&1 &
     
     # Guardar PID
     echo $! > "$pid_file"
-    
     sleep 2
     
     # Verificar que se inició correctamente

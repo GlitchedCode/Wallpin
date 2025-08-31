@@ -246,29 +246,29 @@ src/layout.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/wallpin.dir/build.make CMakeFiles/wallpin.dir/src/layout.c.s
 .PHONY : src/layout.c.s
 
-src/main_wallpaper.o: src/main_wallpaper.c.o
-.PHONY : src/main_wallpaper.o
+src/main.o: src/main.c.o
+.PHONY : src/main.o
 
 # target to build an object file
-src/main_wallpaper.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/wallpin.dir/build.make CMakeFiles/wallpin.dir/src/main_wallpaper.c.o
-.PHONY : src/main_wallpaper.c.o
+src/main.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/wallpin.dir/build.make CMakeFiles/wallpin.dir/src/main.c.o
+.PHONY : src/main.c.o
 
-src/main_wallpaper.i: src/main_wallpaper.c.i
-.PHONY : src/main_wallpaper.i
+src/main.i: src/main.c.i
+.PHONY : src/main.i
 
 # target to preprocess a source file
-src/main_wallpaper.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/wallpin.dir/build.make CMakeFiles/wallpin.dir/src/main_wallpaper.c.i
-.PHONY : src/main_wallpaper.c.i
+src/main.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/wallpin.dir/build.make CMakeFiles/wallpin.dir/src/main.c.i
+.PHONY : src/main.c.i
 
-src/main_wallpaper.s: src/main_wallpaper.c.s
-.PHONY : src/main_wallpaper.s
+src/main.s: src/main.c.s
+.PHONY : src/main.s
 
 # target to generate assembly for a file
-src/main_wallpaper.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/wallpin.dir/build.make CMakeFiles/wallpin.dir/src/main_wallpaper.c.s
-.PHONY : src/main_wallpaper.c.s
+src/main.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/wallpin.dir/build.make CMakeFiles/wallpin.dir/src/main.c.s
+.PHONY : src/main.c.s
 
 src/utils.o: src/utils.c.o
 .PHONY : src/utils.o
@@ -340,9 +340,9 @@ help:
 	@echo "... src/layout.o"
 	@echo "... src/layout.i"
 	@echo "... src/layout.s"
-	@echo "... src/main_wallpaper.o"
-	@echo "... src/main_wallpaper.i"
-	@echo "... src/main_wallpaper.s"
+	@echo "... src/main.o"
+	@echo "... src/main.i"
+	@echo "... src/main.s"
 	@echo "... src/utils.o"
 	@echo "... src/utils.i"
 	@echo "... src/utils.s"
