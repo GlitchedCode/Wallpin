@@ -39,7 +39,7 @@ void masonry_layout_init(MasonryLayout *layout, int grid_width, int row_height, 
     layout->row_height = row_height;
     layout->spacing = spacing;
     
-    // Crear hash table único para esta instancia del layout
+    // Create unique hash table for this instance of the layout
     layout->loaded_paths = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
 }
 
@@ -84,10 +84,10 @@ static void calculate_row_layout(GList *start, int count) {
     while (l && current_count < MAX_IMAGES_PER_ROW) {
         ImageInfo *info = l->data;
         
-        // Clasificar y asignar tamaño estándar
+        // Classify and assign standard size
         classify_and_size_image(info);
         
-        // Verificar si la imagen cabe en la fila actual
+        // Check if the image fits in the current row
         double new_width = row_width + info->target_width;
         if (current_count > 0) {
             new_width += IMAGE_SPACING;
@@ -102,7 +102,7 @@ static void calculate_row_layout(GList *start, int count) {
         l = l->next;
     }
 
-    // Ajustar alturas si es necesario para mantener proporciones
+    // Adjust heights if necessary to maintain proportions
     l = start;
     for (int i = 0; i < current_count && l; i++) {
         ImageInfo *info = l->data;

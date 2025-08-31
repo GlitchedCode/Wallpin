@@ -3,7 +3,6 @@
 # WallPin Multi-Monitor para Hyprland
 # Script para gestionar wallpaper en múltiples pantallas
 
-WALLPIN_DIR="/home/kalytheos/Documents/Proyectos/WallPin"
 LOG_FILE="/tmp/wallpin.log"
 PID_DIR="/tmp/wallpin_pids"
 
@@ -95,18 +94,6 @@ start_monitor() {
     
     # Asegurar que usamos Wayland
     export GDK_BACKEND=wayland
-    
-    # Cambiar al directorio correcto
-    cd "$WALLPIN_DIR" || {
-        echo "❌ Error: No se pudo acceder al directorio $WALLPIN_DIR"
-        exit 1
-    }
-    
-    # Verificar que el ejecutable existe
-    if [[ ! -x "build/wallpin-wallpaper" ]]; then
-        echo "❌ Error: No se encontró build/wallpin-wallpaper. Ejecuta 'make wallpaper' primero."
-        exit 1
-    fi
     
     # Limpiar log anterior para este monitor
     echo "=== WallPin iniciado en $monitor $(date) ===" >> "$LOG_FILE"

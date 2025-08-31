@@ -61,9 +61,9 @@ void apply_css_to_window(GtkWidget *window) {
         "    background-color: #121212;"
         "}";
 
-    // En GTK4, gtk_css_provider_load_from_string no devuelve valor
+    // In GTK4, gtk_css_provider_load_from_string does not return a value
     gtk_css_provider_load_from_string(provider, css);
-    g_print("CSS cargado\n");
+    g_print("CSS loaded\n");
     
     // Aplicar CSS con máxima prioridad
     gtk_style_context_add_provider_for_display(

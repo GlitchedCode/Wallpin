@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.10)
 project(WallPin LANGUAGES C)
 
 # Set the output executable
-set(EXECUTABLE_NAME "wallpin_test")
+set(EXECUTABLE_NAME "wallpin")
 
 # Find required packages
 find_package(PkgConfig REQUIRED)
@@ -71,4 +71,6 @@ message(STATUS "CMAKE_EXE_LINKER_FLAGS: ${CMAKE_EXE_LINKER_FLAGS}")
 message(STATUS "CMAKE_SHARED_LINKER_FLAGS: ${CMAKE_SHARED_LINKER_FLAGS}")
 message(STATUS "CMAKE_C_FLAGS: ${CMAKE_C_FLAGS}")
 message(STATUS "CMAKE_CXX_FLAGS: ${CMAKE_CXX_FLAGS}")
+# Install the executable
+install(TARGETS ${EXECUTABLE_NAME} DESTINATION /usr/local/bin)
 

@@ -10,6 +10,9 @@ WallPinConfig *load_config(void) {
     config->refresh_rate = 10;
     config->animation_speed = 500;
     config->columns = 4;
+    // set default pictures dir, otherwise home 
+    config->assets_dir = g_strdup_printf("%s/Pictures", getenv("HOME"));
+
 
     const char *config_file_path = get_config_file_path(); // Dynamic path determination
 
