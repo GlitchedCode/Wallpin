@@ -26,6 +26,8 @@ static guint scroll_timer_id = 0;
 static double current_scroll_position = 0.0;
 static gboolean auto_scroll_enabled = TRUE;
 
+static WallPinConfig *config = NULL;
+
 // Configuración del auto-scroll para wallpaper (más lento)
 #define SCROLL_SPEED 0.3        // Velocidad más lenta para wallpaper
 #define SCROLL_INTERVAL 16      // 60 FPS
@@ -330,7 +332,7 @@ static void activate(GtkApplication *app, gpointer user_data) {
     gtk_widget_set_sensitive(grid, TRUE);
     
     gtk_scrolled_window_set_child(GTK_SCROLLED_WINDOW(scroll), grid);
-    load_images_from_directory(GTK_BOX(grid), ASSETS_DIR);
+    load_images_from_directory(GTK_BOX(grid), config->assets_dir);
 
     setup_infinite_scroll(scroll);
 
@@ -388,6 +390,8 @@ int main(int argc, char **argv) {
             gtk_argv[gtk_argc++] = argv[i];
         }
     }
+
+    config = load_config();
 
     if (app_data.monitor_name) {
         g_print("Iniciando WallPin wallpaper en monitor: %s\n", app_data.monitor_name);

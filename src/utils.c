@@ -12,7 +12,7 @@
 #include "layout.h"
 
 void apply_css_to_window(GtkWidget *window) {
-    g_print("=== APLICANDO CSS ===\n");
+    g_print("=== Applying CSS ===\n");
     
     GtkCssProvider *provider = gtk_css_provider_new();
     const char *css = 

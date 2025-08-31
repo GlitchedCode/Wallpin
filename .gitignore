@@ -2,6 +2,8 @@
 build/
 *.o
 *.so
+CMakeFiles/
+Makefile
 
 # IDE/Editor files
 .vscode/
