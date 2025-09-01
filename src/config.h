@@ -26,7 +26,7 @@ static inline const char* get_config_file_path(void) {
 // Configuration settings structure
 typedef struct {
     int     refresh_rate;      // Image refresh rate in seconds
-    int     animation_speed;   // Transition animation speed
+    double  animation_speed;   // Transition animation speed
     int     columns;          // Number of columns in the grid
     bool    randomize;       // Randomize image order
     char*   assets_dir;    // Directory for images
