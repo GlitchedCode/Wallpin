@@ -185,48 +185,49 @@ static void render_layout(GtkBox *container) {
 
     g_print("Using %d columns for wallpaper layout\n\n", num_columns);
 
-    GtkWidget *columns_container = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, IMAGE_SPACING);
-    gtk_widget_set_halign(columns_container, GTK_ALIGN_CENTER);
-    gtk_box_append(container, columns_container);
+    // Create two separate masonry containers
+    for (int repeat = 0; repeat < 2; repeat++) {
+        GtkWidget *columns_container = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, IMAGE_SPACING);
+        gtk_widget_set_halign(columns_container, GTK_ALIGN_CENTER);
+        gtk_box_append(container, columns_container);
 
-    GtkWidget **columns = g_new0(GtkWidget*, num_columns);
-    int *column_heights = g_new0(int, num_columns);
+        GtkWidget **columns = g_new0(GtkWidget*, num_columns);
+        int *column_heights = g_new0(int, num_columns);
 
-    for (int i = 0; i < num_columns; i++) {
-        columns[i] = gtk_box_new(GTK_ORIENTATION_VERTICAL, IMAGE_SPACING);
-        gtk_widget_set_halign(columns[i], GTK_ALIGN_START);
-        gtk_widget_set_valign(columns[i], GTK_ALIGN_START);
-        gtk_box_append(GTK_BOX(columns_container), columns[i]);
-        column_heights[i] = 0;
-    }
-
-    int image_index = 0;
-    for (GList *l = layout.images; l != NULL; l = l->next) {
-        ImageInfo *info = (ImageInfo *)l->data;
-
-        int shortest_column = 0;
-        for (int i = 1; i < num_columns; i++) {
-            if (column_heights[i] < column_heights[shortest_column]) {
-                shortest_column = i;
-            }
+        for (int i = 0; i < num_columns; i++) {
+            columns[i] = gtk_box_new(GTK_ORIENTATION_VERTICAL, IMAGE_SPACING);
+            gtk_widget_set_halign(columns[i], GTK_ALIGN_START);
+            gtk_widget_set_valign(columns[i], GTK_ALIGN_START);
+            gtk_box_append(GTK_BOX(columns_container), columns[i]);
+            column_heights[i] = 0;
         }
 
-        int widget_width = STANDARD_WIDTH;
-        int widget_height = info->target_height;
+        // Render the layout in this container
+        for (GList *l = layout.images; l != NULL; l = l->next) {
+            ImageInfo *info = (ImageInfo *)l->data;
 
-        GtkWidget *image_widget = create_rounded_image(info->path, widget_width, widget_height);
+            int shortest_column = 0;
+            for (int i = 1; i < num_columns; i++) {
+                if (column_heights[i] < column_heights[shortest_column]) {
+                    shortest_column = i;
+                }
+            }
 
-        gtk_widget_set_size_request(image_widget, widget_width, widget_height);
-        gtk_box_append(GTK_BOX(columns[shortest_column]), image_widget);
-        column_heights[shortest_column] += widget_height + IMAGE_SPACING;
+            int widget_width = STANDARD_WIDTH;
+            int widget_height = info->target_height;
 
-        image_index++;
+            GtkWidget *image_widget = create_rounded_image(info->path, widget_width, widget_height);
+
+            gtk_widget_set_size_request(image_widget, widget_width, widget_height);
+            gtk_box_append(GTK_BOX(columns[shortest_column]), image_widget);
+            column_heights[shortest_column] += widget_height + IMAGE_SPACING;
+        }
+
+        g_free(columns);
+        g_free(column_heights);
     }
 
-    g_print("\n=== WALLPAPER IMAGES LOADED ===\n");
-
-    g_free(columns);
-    g_free(column_heights);
+    g_print("\n=== WALLPAPER IMAGES LOADED (2 COPIES) ===\n");
 }
 
 static gboolean auto_scroll_tick(G_GNUC_UNUSED gpointer user_data) {
@@ -235,16 +236,18 @@ static gboolean auto_scroll_tick(G_GNUC_UNUSED gpointer user_data) {
     }
 
     double upper = gtk_adjustment_get_upper(scroll_adjustment);
-    double page_size = gtk_adjustment_get_page_size(scroll_adjustment);
-    double max_scroll = upper - page_size;
+    double half_content = upper / 2;
+    // Account for the IMAGE_SPACING between the two containers
+    double reset_point = half_content - IMAGE_SPACING * 2;
 
-    if (max_scroll <= 0) {
+    if (half_content <= 0) {
         return G_SOURCE_CONTINUE;
     }
 
-    current_scroll_position += SCROLL_SPEED;
+    current_scroll_position += config->animation_speed;
 
-    if (current_scroll_position >= max_scroll) {
+    // Reset before reaching the spacing gap between containers for seamless loop
+    if (current_scroll_position >= reset_point) {
         current_scroll_position = 0.0;
     }
 
@@ -311,7 +314,7 @@ static void setup_infinite_scroll(GtkWidget *scroll_window) {
 
     scroll_timer_id = g_timeout_add(SCROLL_INTERVAL, auto_scroll_tick, NULL);
 
-    g_print("Wallpaper auto-scroll iniciado (velocidad: %.1f px/frame)\n", SCROLL_SPEED);
+    g_print("Wallpaper auto-scroll iniciado (velocidad: %.1f px/frame)\n", config->animation_speed);
 }
 
 // Estructura para pasar datos a la función activate
