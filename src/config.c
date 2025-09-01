@@ -1,5 +1,6 @@
 #include "config.h"
 #include <glib.h>
+#include <stdlib.h>
 #include <stdio.h>
 
 WallPinConfig *load_config(void) {
@@ -10,6 +11,7 @@ WallPinConfig *load_config(void) {
     config->refresh_rate = 10;
     config->animation_speed = 500;
     config->columns = 4;
+    config->randomize = TRUE;
     // set default pictures dir, otherwise home 
     config->assets_dir = g_strdup_printf("%s/Pictures", getenv("HOME"));
 
@@ -21,6 +23,7 @@ WallPinConfig *load_config(void) {
         config->refresh_rate = g_key_file_get_integer(key_file, "Display", "refresh_rate", NULL);
         config->animation_speed = g_key_file_get_integer(key_file, "Display", "animation_speed", NULL);
         config->columns = g_key_file_get_integer(key_file, "Display", "columns", NULL);
+        config->randomize = g_key_file_get_boolean(key_file, "Display", "randomize", NULL);
         config->assets_dir = g_key_file_get_string(key_file, "Paths", "assets_dir", NULL);
     }
 

@@ -41,6 +41,36 @@ static GtkWidget *create_image_grid(void) {
     return container;
 }
 
+void g_list_shuffle(GList **list) {
+    if (list == NULL || *list == NULL) return;
+
+    GList *l = *list;
+    int length = g_list_length(l);
+    if (length < 2) return;
+
+    GList **array = g_new(GList*, length);
+    int i = 0;
+    for (GList *iter = l; iter != NULL; iter = iter->next) {
+        array[i++] = iter;
+    }
+
+    for (i = length - 1; i > 0; i--) {
+        int j = rand() % (i + 1);
+        GList *temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+
+    GList *shuffled = NULL;
+    for (i = 0; i < length; i++) {
+        shuffled = g_list_append(shuffled, array[i]->data);
+    }
+
+    g_free(array);
+    g_list_free(*list);
+    *list = shuffled;
+}
+
 static void load_images_from_directory(GtkBox *container, const char *dir_path) {
     DIR *dir;
     struct dirent *entry;
@@ -74,7 +104,10 @@ static void load_images_from_directory(GtkBox *container, const char *dir_path) 
 
     g_print("Found %d images for wallpaper\n", image_count);
 
-    image_files = g_list_sort(image_files, (GCompareFunc)g_strcmp0);
+    if(config->randomize)
+      g_list_shuffle(&image_files);
+    else
+      image_files = g_list_sort(image_files, (GCompareFunc)g_strcmp0);
 
     for (GList *l = image_files; l != NULL; l = l->next) {
         masonry_layout_add_image(&layout, (const char *)l->data);
