@@ -69,7 +69,7 @@ scrape_feed() {
   for image in $images; do
     url=`echo $image | jq -r ".url"`
     user=`echo $image | jq -r ".user"`
-    curl -s "$url" -o "$TARGET_DIR/PINSCRAPED_${user}_$(basename $url)"
+    curl --skip-existing -s "$url" -o "$TARGET_DIR/PINSCRAPED_${user}_$(basename $url)"
   done
 }
 
