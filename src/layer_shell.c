@@ -1,5 +1,6 @@
 #include "layer_shell.h"
 #include <gtk4-layer-shell.h>
+#include <gdk/gdk.h>
 
 gboolean layer_shell_is_supported(void) {
     // Check if we're on Wayland and layer shell is available
@@ -59,6 +60,10 @@ void layer_shell_init_window_for_monitor(GtkWindow *window, const char *monitor_
         for (guint i = 0; i < n_monitors; i++) {
             GdkMonitor *monitor = g_list_model_get_item(monitors, i);
             const char *connector = gdk_monitor_get_connector(monitor);
+            GdkRectangle geometry = {0};
+            gdk_monitor_get_geometry(monitor, &geometry);
+            gtk_window_set_default_size(window, geometry.width, geometry.height);
+            gtk_window_fullscreen_on_monitor(window, monitor);
             
             if (connector && strcmp(connector, monitor_name) == 0) {
                 gtk_layer_set_monitor(window, monitor);

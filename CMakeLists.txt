@@ -28,10 +28,20 @@ include_directories(${GDKPIXBUF_INCLUDE_DIRS})
 link_directories(${GDKPIXBUF_LIBRARY_DIRS})
 add_definitions(${GDKPIXBUF_CFLAGS_OTHER})
 
+pkg_check_modules(GDK REQUIRED gdk-3.0)
+include_directories(${GDK_INCLUDE_DIRS})
+link_directories(${GDK_LIBRARY_DIRS})
+add_definitions(${GDK_CFLAGS_OTHER})
+
 pkg_check_modules(GTKSHELL REQUIRED gtk4-layer-shell-0)
 include_directories(${GTKSHELL_INCLUDE_DIRS})
 link_directories(${GTKSHELL_LIBRARY_DIRS})
 add_definitions(${GTKSHELL_CFLAGS_OTHER})
+
+pkg_check_modules(WAYLAND REQUIRED wayland-client)
+include_directories(${WAYLAND_INCLUDE_DIRS})
+link_directories(${WAYLAND_LIBRARY_DIRS})
+add_definitions(${WAYLAND_CFLAGS_OTHER})
 
 
 # Add the source files
@@ -53,7 +63,9 @@ target_link_libraries(${EXECUTABLE_NAME}
   ${SYSPROF_LIBRARIES} 
   ${GTK4_LIBRARIES}
   ${GDKPIXBUF_LIBRARIES}
+  ${GDK_LIBRARIES}
   ${GTKSHELL_LIBRARIES}
+  ${WAYLAND_LIBRARIES}
   -pg
   -pthread)
 

@@ -3,7 +3,7 @@
 # WallPin Multi-Monitor para Hyprland
 # Script para gestionar wallpaper en múltiples pantallas
 
-WP = $(which wallpin)
+WP=$(which wallpin)
 LOG_FILE="/tmp/wallpin.log"
 PID_DIR="/tmp/wallpin_pids"
 

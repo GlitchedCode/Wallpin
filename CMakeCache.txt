@@ -232,6 +232,36 @@ pkgcfg_lib_GDKPIXBUF_glib-2.0:FILEPATH=/usr/lib/libglib-2.0.so
 pkgcfg_lib_GDKPIXBUF_gobject-2.0:FILEPATH=/usr/lib/libgobject-2.0.so
 
 //Path to a library.
+pkgcfg_lib_GDK_cairo:FILEPATH=/usr/lib/libcairo.so
+
+//Path to a library.
+pkgcfg_lib_GDK_cairo-gobject:FILEPATH=/usr/lib/libcairo-gobject.so
+
+//Path to a library.
+pkgcfg_lib_GDK_gdk-3:FILEPATH=/usr/lib/libgdk-3.so
+
+//Path to a library.
+pkgcfg_lib_GDK_gdk_pixbuf-2.0:FILEPATH=/usr/lib/libgdk_pixbuf-2.0.so
+
+//Path to a library.
+pkgcfg_lib_GDK_glib-2.0:FILEPATH=/usr/lib/libglib-2.0.so
+
+//Path to a library.
+pkgcfg_lib_GDK_gobject-2.0:FILEPATH=/usr/lib/libgobject-2.0.so
+
+//Path to a library.
+pkgcfg_lib_GDK_harfbuzz:FILEPATH=/usr/lib/libharfbuzz.so
+
+//Path to a library.
+pkgcfg_lib_GDK_pango-1.0:FILEPATH=/usr/lib/libpango-1.0.so
+
+//Path to a library.
+pkgcfg_lib_GDK_pangocairo-1.0:FILEPATH=/usr/lib/libpangocairo-1.0.so
+
+//Path to a library.
+pkgcfg_lib_GDK_z:FILEPATH=/usr/lib/libz.so
+
+//Path to a library.
 pkgcfg_lib_GLIB_gio-2.0:FILEPATH=/usr/lib/libgio-2.0.so
 
 //Path to a library.
@@ -293,6 +323,12 @@ pkgcfg_lib_SYSPROF_gobject-2.0:FILEPATH=/usr/lib/libgobject-2.0.so
 
 //Path to a library.
 pkgcfg_lib_SYSPROF_sysprof-6:FILEPATH=/usr/lib/libsysprof-6.so
+
+//Path to a library.
+pkgcfg_lib_WAYLAND_m:FILEPATH=/usr/lib/libm.so
+
+//Path to a library.
+pkgcfg_lib_WAYLAND_wayland-client:FILEPATH=/usr/lib/libwayland-client.so
 
 
 ########################
@@ -469,6 +505,41 @@ GDKPIXBUF_gdk-pixbuf-2.0_INCLUDEDIR:INTERNAL=
 GDKPIXBUF_gdk-pixbuf-2.0_LIBDIR:INTERNAL=
 GDKPIXBUF_gdk-pixbuf-2.0_PREFIX:INTERNAL=
 GDKPIXBUF_gdk-pixbuf-2.0_VERSION:INTERNAL=
+GDK_CFLAGS:INTERNAL=-I/usr/include/gtk-3.0;-I/usr/include/pango-1.0;-I/usr/include;-I/usr/include/harfbuzz;-I/usr/include/gdk-pixbuf-2.0;-I/usr/include/cairo;-I/usr/include/gio-unix-2.0;-I/usr/include/libmount;-I/usr/include/blkid;-I/usr/include/freetype2;-I/usr/include/libpng16;-I/usr/include/glib-2.0;-I/usr/lib/glib-2.0/include;-I/usr/include/sysprof-6;-pthread;-I/usr/include/pixman-1;-I/usr/include/cloudproviders;-I/usr/include/fribidi
+GDK_CFLAGS_I:INTERNAL=
+GDK_CFLAGS_OTHER:INTERNAL=-pthread
+GDK_FOUND:INTERNAL=1
+GDK_INCLUDEDIR:INTERNAL=/usr/include
+GDK_INCLUDE_DIRS:INTERNAL=/usr/include/gtk-3.0;/usr/include/pango-1.0;/usr/include;/usr/include/harfbuzz;/usr/include/gdk-pixbuf-2.0;/usr/include/cairo;/usr/include/gio-unix-2.0;/usr/include/libmount;/usr/include/blkid;/usr/include/freetype2;/usr/include/libpng16;/usr/include/glib-2.0;/usr/lib/glib-2.0/include;/usr/include/sysprof-6;/usr/include/pixman-1;/usr/include/cloudproviders;/usr/include/fribidi
+GDK_LDFLAGS:INTERNAL=-L/usr/lib;-lgdk-3;-lz;-lpangocairo-1.0;-lpango-1.0;-lgdk_pixbuf-2.0;-lcairo-gobject;-lgobject-2.0;-lcairo;-lharfbuzz;-lglib-2.0
+GDK_LDFLAGS_OTHER:INTERNAL=
+GDK_LIBDIR:INTERNAL=/usr/lib
+GDK_LIBRARIES:INTERNAL=gdk-3;z;pangocairo-1.0;pango-1.0;gdk_pixbuf-2.0;cairo-gobject;gobject-2.0;cairo;harfbuzz;glib-2.0
+GDK_LIBRARY_DIRS:INTERNAL=/usr/lib
+GDK_LIBS:INTERNAL=
+GDK_LIBS_L:INTERNAL=
+GDK_LIBS_OTHER:INTERNAL=
+GDK_LIBS_PATHS:INTERNAL=
+GDK_MODULE_NAME:INTERNAL=gdk-3.0
+GDK_PREFIX:INTERNAL=/usr
+GDK_STATIC_CFLAGS:INTERNAL=-I/usr/include/gtk-3.0;-I/usr/include/pango-1.0;-I/usr/include;-I/usr/include/harfbuzz;-I/usr/include/gdk-pixbuf-2.0;-I/usr/include/cairo;-I/usr/include/gio-unix-2.0;-I/usr/include/libmount;-I/usr/include/blkid;-I/usr/include/freetype2;-I/usr/include/libpng16;-I/usr/include/glib-2.0;-I/usr/lib/glib-2.0/include;-I/usr/include/sysprof-6;-pthread;-I/usr/include/pixman-1;-I/usr/include/cloudproviders;-I/usr/include/fribidi;-DLZMA_API_STATIC;-DXML_STATIC
+GDK_STATIC_CFLAGS_I:INTERNAL=
+GDK_STATIC_CFLAGS_OTHER:INTERNAL=-pthread;-DLZMA_API_STATIC;-DXML_STATIC
+GDK_STATIC_INCLUDE_DIRS:INTERNAL=/usr/include/gtk-3.0;/usr/include/pango-1.0;/usr/include;/usr/include/harfbuzz;/usr/include/gdk-pixbuf-2.0;/usr/include/cairo;/usr/include/gio-unix-2.0;/usr/include/libmount;/usr/include/blkid;/usr/include/freetype2;/usr/include/libpng16;/usr/include/glib-2.0;/usr/lib/glib-2.0/include;/usr/include/sysprof-6;/usr/include/pixman-1;/usr/include/cloudproviders;/usr/include/fribidi
+GDK_STATIC_LDFLAGS:INTERNAL=-L/usr/lib;-lgdk-3;-lz;-lpangocairo-1.0;-lm;-lpangoft2-1.0;-lm;-lpango-1.0;-lm;-lthai;-ldatrie;-lXft;-lharfbuzz-gobject;-lgdk_pixbuf-2.0;-lm;-ltiff;-ljbig;-lz;-lm;-lzstd;-llzma;-lpthread;-ljpeg;-lcairo-gobject;-ldl;-lgio-2.0;-lgobject-2.0;-lgmodule-2.0;-pthread;-lmount;-lblkid;-lXi;-lXrandr;-lXcursor;-lXcomposite;-lXdamage;-lXfixes;-lXinerama;-lxkbcommon;-lwayland-cursor;-lwayland-egl;-lwayland-client;-lm;-pthread;-lrt;-lffi;-lcairo;-lm;-ldl;-lfontconfig;-pthread;-lm;-lexpat;-lm;-lfreetype;-lbz2;-lpng16;-lm;-lm;-lz;-lharfbuzz;-pthread;-lm;-lglib-2.0;-lm;-lsysprof-capture-4;-Wl,-z,nodelete;-pthread;-lpcre2-8;-lgraphite2;-lbrotlidec;-lbrotlicommon;-lXext;-lXrender;-lxcb-render;-lxcb-shm;-lpixman-1;-lm;-pthread;-lepoxy;-ldl;-lX11;-lpthread;-lxcb;-lXau;-lXdmcp;-lGL;-lEGL;-lcloudproviders;-lfribidi
+GDK_STATIC_LDFLAGS_OTHER:INTERNAL=-pthread;-pthread;-pthread;-pthread;-Wl,-z,nodelete;-pthread;-pthread
+GDK_STATIC_LIBDIR:INTERNAL=
+GDK_STATIC_LIBRARIES:INTERNAL=gdk-3;z;pangocairo-1.0;m;pangoft2-1.0;m;pango-1.0;m;thai;datrie;Xft;harfbuzz-gobject;gdk_pixbuf-2.0;m;tiff;jbig;z;m;zstd;lzma;pthread;jpeg;cairo-gobject;dl;gio-2.0;gobject-2.0;gmodule-2.0;mount;blkid;Xi;Xrandr;Xcursor;Xcomposite;Xdamage;Xfixes;Xinerama;xkbcommon;wayland-cursor;wayland-egl;wayland-client;m;rt;ffi;cairo;m;dl;fontconfig;m;expat;m;freetype;bz2;png16;m;m;z;harfbuzz;m;glib-2.0;m;sysprof-capture-4;pcre2-8;graphite2;brotlidec;brotlicommon;Xext;Xrender;xcb-render;xcb-shm;pixman-1;m;epoxy;dl;X11;pthread;xcb;Xau;Xdmcp;GL;EGL;cloudproviders;fribidi
+GDK_STATIC_LIBRARY_DIRS:INTERNAL=/usr/lib
+GDK_STATIC_LIBS:INTERNAL=
+GDK_STATIC_LIBS_L:INTERNAL=
+GDK_STATIC_LIBS_OTHER:INTERNAL=
+GDK_STATIC_LIBS_PATHS:INTERNAL=
+GDK_VERSION:INTERNAL=3.24.50
+GDK_gdk-3.0_INCLUDEDIR:INTERNAL=
+GDK_gdk-3.0_LIBDIR:INTERNAL=
+GDK_gdk-3.0_PREFIX:INTERNAL=
+GDK_gdk-3.0_VERSION:INTERNAL=
 GLIB_CFLAGS:INTERNAL=-I/usr/include/glib-2.0;-I/usr/lib/glib-2.0/include;-I/usr/include/sysprof-6;-pthread;-I/usr/include
 GLIB_CFLAGS_I:INTERNAL=
 GLIB_CFLAGS_OTHER:INTERNAL=-pthread
@@ -617,22 +688,81 @@ SYSPROF_sysprof-6_INCLUDEDIR:INTERNAL=
 SYSPROF_sysprof-6_LIBDIR:INTERNAL=
 SYSPROF_sysprof-6_PREFIX:INTERNAL=
 SYSPROF_sysprof-6_VERSION:INTERNAL=
+WAYLAND_CFLAGS:INTERNAL=-I/usr/include
+WAYLAND_CFLAGS_I:INTERNAL=
+WAYLAND_CFLAGS_OTHER:INTERNAL=
+WAYLAND_FOUND:INTERNAL=1
+WAYLAND_INCLUDEDIR:INTERNAL=/usr/include
+WAYLAND_INCLUDE_DIRS:INTERNAL=/usr/include
+WAYLAND_LDFLAGS:INTERNAL=-L/usr/lib;-lwayland-client;-lm
+WAYLAND_LDFLAGS_OTHER:INTERNAL=
+WAYLAND_LIBDIR:INTERNAL=/usr/lib
+WAYLAND_LIBRARIES:INTERNAL=wayland-client;m
+WAYLAND_LIBRARY_DIRS:INTERNAL=/usr/lib
+WAYLAND_LIBS:INTERNAL=
+WAYLAND_LIBS_L:INTERNAL=
+WAYLAND_LIBS_OTHER:INTERNAL=
+WAYLAND_LIBS_PATHS:INTERNAL=
+WAYLAND_MODULE_NAME:INTERNAL=wayland-client
+WAYLAND_PREFIX:INTERNAL=/usr
+WAYLAND_STATIC_CFLAGS:INTERNAL=-I/usr/include
+WAYLAND_STATIC_CFLAGS_I:INTERNAL=
+WAYLAND_STATIC_CFLAGS_OTHER:INTERNAL=
+WAYLAND_STATIC_INCLUDE_DIRS:INTERNAL=/usr/include
+WAYLAND_STATIC_LDFLAGS:INTERNAL=-L/usr/lib;-lwayland-client;-lm;-pthread;-lrt;-lffi
+WAYLAND_STATIC_LDFLAGS_OTHER:INTERNAL=-pthread
+WAYLAND_STATIC_LIBDIR:INTERNAL=
+WAYLAND_STATIC_LIBRARIES:INTERNAL=wayland-client;m;rt;ffi
+WAYLAND_STATIC_LIBRARY_DIRS:INTERNAL=/usr/lib
+WAYLAND_STATIC_LIBS:INTERNAL=
+WAYLAND_STATIC_LIBS_L:INTERNAL=
+WAYLAND_STATIC_LIBS_OTHER:INTERNAL=
+WAYLAND_STATIC_LIBS_PATHS:INTERNAL=
+WAYLAND_VERSION:INTERNAL=1.24.0
+WAYLAND_wayland-client_INCLUDEDIR:INTERNAL=
+WAYLAND_wayland-client_LIBDIR:INTERNAL=
+WAYLAND_wayland-client_PREFIX:INTERNAL=
+WAYLAND_wayland-client_VERSION:INTERNAL=
+__pkg_config_arguments_GDK:INTERNAL=REQUIRED;gdk-3.0
 __pkg_config_arguments_GDKPIXBUF:INTERNAL=REQUIRED;gdk-pixbuf-2.0
 __pkg_config_arguments_GLIB:INTERNAL=REQUIRED;glib-2.0
 __pkg_config_arguments_GTK4:INTERNAL=REQUIRED;gtk4
 __pkg_config_arguments_GTKSHELL:INTERNAL=REQUIRED;gtk4-layer-shell-0
 __pkg_config_arguments_SYSPROF:INTERNAL=REQUIRED;sysprof-6
+__pkg_config_arguments_WAYLAND:INTERNAL=REQUIRED;wayland-client
+__pkg_config_checked_GDK:INTERNAL=1
 __pkg_config_checked_GDKPIXBUF:INTERNAL=1
 __pkg_config_checked_GLIB:INTERNAL=1
 __pkg_config_checked_GTK4:INTERNAL=1
 __pkg_config_checked_GTKSHELL:INTERNAL=1
 __pkg_config_checked_SYSPROF:INTERNAL=1
+__pkg_config_checked_WAYLAND:INTERNAL=1
 //ADVANCED property for variable: pkgcfg_lib_GDKPIXBUF_gdk_pixbuf-2.0
 pkgcfg_lib_GDKPIXBUF_gdk_pixbuf-2.0-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: pkgcfg_lib_GDKPIXBUF_glib-2.0
 pkgcfg_lib_GDKPIXBUF_glib-2.0-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: pkgcfg_lib_GDKPIXBUF_gobject-2.0
 pkgcfg_lib_GDKPIXBUF_gobject-2.0-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_GDK_cairo
+pkgcfg_lib_GDK_cairo-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_GDK_cairo-gobject
+pkgcfg_lib_GDK_cairo-gobject-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_GDK_gdk-3
+pkgcfg_lib_GDK_gdk-3-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_GDK_gdk_pixbuf-2.0
+pkgcfg_lib_GDK_gdk_pixbuf-2.0-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_GDK_glib-2.0
+pkgcfg_lib_GDK_glib-2.0-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_GDK_gobject-2.0
+pkgcfg_lib_GDK_gobject-2.0-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_GDK_harfbuzz
+pkgcfg_lib_GDK_harfbuzz-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_GDK_pango-1.0
+pkgcfg_lib_GDK_pango-1.0-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_GDK_pangocairo-1.0
+pkgcfg_lib_GDK_pangocairo-1.0-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_GDK_z
+pkgcfg_lib_GDK_z-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: pkgcfg_lib_GLIB_gio-2.0
 pkgcfg_lib_GLIB_gio-2.0-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: pkgcfg_lib_GLIB_glib-2.0
@@ -675,5 +805,9 @@ pkgcfg_lib_SYSPROF_glib-2.0-ADVANCED:INTERNAL=1
 pkgcfg_lib_SYSPROF_gobject-2.0-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: pkgcfg_lib_SYSPROF_sysprof-6
 pkgcfg_lib_SYSPROF_sysprof-6-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_WAYLAND_m
+pkgcfg_lib_WAYLAND_m-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_WAYLAND_wayland-client
+pkgcfg_lib_WAYLAND_wayland-client-ADVANCED:INTERNAL=1
 prefix_result:INTERNAL=/usr/lib
 

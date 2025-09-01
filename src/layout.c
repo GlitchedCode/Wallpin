@@ -73,7 +73,7 @@ static void classify_and_size_image(ImageInfo *info) {
     }
 }
 
-static void calculate_row_layout(GList *start, int count) {
+static void calculate_row_layout(GList *start, int window_width, int count) {
     if (count == 0) return;
 
     int current_count = 0;
@@ -93,7 +93,7 @@ static void calculate_row_layout(GList *start, int count) {
             new_width += IMAGE_SPACING;
         }
         
-        if (new_width > WINDOW_WIDTH - (IMAGE_SPACING * 2)) {
+        if (new_width > window_width - (IMAGE_SPACING * 2)) {
             break;
         }
         
@@ -162,7 +162,7 @@ void masonry_layout_add_image(MasonryLayout *layout, const char *path) {
     }
 }
 
-void masonry_layout_calculate(MasonryLayout *layout) {
+void masonry_layout_calculate(MasonryLayout *layout, int window_width) {
     if (!layout->images) return;
 
     int available_width = layout->grid_width - (2 * IMAGE_SPACING);
@@ -178,7 +178,7 @@ void masonry_layout_calculate(MasonryLayout *layout) {
         if (group) {
             int count = g_list_length(group);
             // Calculate layout for the group
-            calculate_row_layout(group, count);
+            calculate_row_layout(group, window_width, count);
             
             // Add to processed list
             processed_images = g_list_concat(processed_images, group);
@@ -190,7 +190,7 @@ void masonry_layout_calculate(MasonryLayout *layout) {
         } else {
             // If we couldn't form a group, just add this image alone
             GList *single = g_list_append(NULL, info);
-            calculate_row_layout(single, 1);
+            calculate_row_layout(single, window_width, 1);
             processed_images = g_list_append(processed_images, info);
             current = current->next;
         }

@@ -9,7 +9,6 @@
 #include "layout.h"
 #include "layer_shell.h"
 
-#define WINDOW_HEIGHT 1080
 #define CORNER_RADIUS 16
 
 static MasonryLayout layout;
@@ -25,6 +24,7 @@ static GtkAdjustment *scroll_adjustment = NULL;
 static guint scroll_timer_id = 0;
 static double current_scroll_position = 0.0;
 static gboolean auto_scroll_enabled = TRUE;
+static int window_width, window_height = 0;
 
 static WallPinConfig *config = NULL;
 
@@ -48,7 +48,7 @@ static void load_images_from_directory(GtkBox *container, const char *dir_path) 
     GList *image_files = NULL;
     int image_count = 0;
 
-    masonry_layout_init(&layout, WINDOW_WIDTH, STANDARD_WIDTH, IMAGE_SPACING);
+    masonry_layout_init(&layout, window_width, STANDARD_WIDTH, IMAGE_SPACING);
 
     dir = opendir(dir_path);
     if (dir == NULL) {
@@ -83,7 +83,7 @@ static void load_images_from_directory(GtkBox *container, const char *dir_path) 
 
     g_list_free(image_files);
 
-    masonry_layout_calculate(&layout);
+    masonry_layout_calculate(&layout, window_width);
     render_layout(container);
     closedir(dir);
 }
@@ -145,7 +145,7 @@ static void render_layout(GtkBox *container) {
     int num_images = g_list_length(layout.images);
     g_print("\nRendering %d images in wallpaper masonry layout...\n", num_images);
 
-    int container_width = WINDOW_WIDTH - (IMAGE_SPACING * 2);
+    int container_width = window_width - (IMAGE_SPACING * 2);
     int num_columns = container_width / (STANDARD_WIDTH + IMAGE_SPACING);
     if (num_columns > 5) num_columns = 5;
     if (num_columns < 2) num_columns = 2;
@@ -284,6 +284,7 @@ static void setup_infinite_scroll(GtkWidget *scroll_window) {
 // Estructura para pasar datos a la función activate
 typedef struct {
     const char *monitor_name;
+    const char *mode; // WIDTHxHEIGHT
 } AppData;
 
 static void activate(GtkApplication *app, gpointer user_data) {
@@ -299,17 +300,10 @@ static void activate(GtkApplication *app, gpointer user_data) {
     } else {
         gtk_window_set_title(GTK_WINDOW(window), "WallPin - Wallpaper Mode");
     }
-    
-    // Establecer tamaño por defecto antes del layer shell
-    gtk_window_set_default_size(GTK_WINDOW(window), 1920, 1080);
 
-    // Configurar layer shell para wallpaper en monitor específico
-    if (data && data->monitor_name) {
-        layer_shell_init_window_for_monitor(GTK_WINDOW(window), data->monitor_name);
-    } else {
-        layer_shell_init_window(GTK_WINDOW(window));
-    }
+    layer_shell_init_window_for_monitor(GTK_WINDOW(window), data->monitor_name);
     layer_shell_configure_wallpaper(GTK_WINDOW(window));
+    gtk_window_get_default_size(GTK_WINDOW(window), &window_width, &window_height);
 
     apply_css_to_window(window);
 
@@ -355,6 +349,8 @@ void usage() {
     g_print("Usage: wallpin_wallpaper [Options]\n");
     g_print("Options:\n");
     g_print("  --monitor, -m <name>   Specify monitor (eg: HDMI-A-1, eDP-1)\n");
+    g_print("  --width, -w <pixels>    Set window width (default: 1920)\n");
+    g_print("  --height, -H <pixels>   Set window height (default: 1080)\n");
     g_print("  --help, -h             Show this message\n");
 }
 

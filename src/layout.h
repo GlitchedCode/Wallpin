@@ -21,7 +21,6 @@
 // Límites y espaciado
 #define MAX_IMAGES_PER_ROW 5          // Número máximo de imágenes por fila
 #define IMAGE_SPACING 16              // Espaciado entre imágenes
-#define WINDOW_WIDTH 1920            // Ancho de la ventana
 
 typedef enum {
     IMAGE_VERTICAL,   // Aspect ratio < 0.75 (más alto que ancho, ej: 9:16)
@@ -49,7 +48,7 @@ typedef struct {
 
 void masonry_layout_init(MasonryLayout *layout, int grid_width, int row_height, int spacing);
 void masonry_layout_add_image(MasonryLayout *layout, const char *path);
-void masonry_layout_calculate(MasonryLayout *layout);
+void masonry_layout_calculate(MasonryLayout *layout, int window_width);
 void masonry_layout_free(MasonryLayout *layout);
 
 #endif // LAYOUT_H
